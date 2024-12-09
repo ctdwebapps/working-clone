@@ -5,9 +5,8 @@ import {
   SignedIn,
   SignedOut,
   SignInButton,
-  SignUpButton,
 } from '@clerk/nextjs'
-import { Loader } from 'lucide-react'
+import { Loader2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -23,23 +22,30 @@ export default function Home() {
         </h1>
         <div className='flex flex-col items-center gap-y-3 max-w-[330px] w-full'>
           <ClerkLoading>
-            <Loader className='h-5 w-5 text-muted-foreground animate-spin' />
+            <Loader2 className='h-5 w-5 text-muted-foreground animate-spin' />
           </ClerkLoading>
           <ClerkLoaded>
             <SignedOut>
-              <SignUpButton mode='modal' forceRedirectUrl='/languages'>
-                <Button size='lg' variant='secondary' className='w-full'>
-                  Get Started
-                </Button>
-              </SignUpButton>
               <SignInButton mode='modal' forceRedirectUrl='/languages'>
-                <Button size='lg' variant='primaryOutline' className='w-full'>
-                  I already have an account
+                {/* <SignInButton mode='modal'> */}
+                <Button
+                  size='lg'
+                  variant='primaryOutline'
+                  className='w-full'
+                  aria-label='Login to your account'
+                >
+                  LOGIN
                 </Button>
               </SignInButton>
             </SignedOut>
             <SignedIn>
-              <Button size='lg' variant='secondary' className='w-full' asChild>
+              <Button
+                size='lg'
+                variant='secondary'
+                className='w-full bg-orange-600 hover:bg-orange-500/90 border-orange-700 '
+                asChild
+                aria-label='Continue'
+              >
                 <Link href='/languages'>Continue Learning</Link>
               </Button>
             </SignedIn>
