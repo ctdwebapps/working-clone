@@ -1,3 +1,4 @@
+import { relations } from 'drizzle-orm'
 import {
   integer,
   jsonb,
@@ -23,12 +24,24 @@ export const companies = pgTable('companies', {
 export const classes = pgTable('classes', {
   id: serial('id').primaryKey(),
   classNumber: text('class_number').notNull().unique(),
+  languageId: integer('language_id').references(() => languages.id, {
+    onDelete: 'restrict',
+  }),
   createdAt: timestamp('created_at').defaultNow(),
 })
 
+//classes relations
+export const classesRelations = relations(classes, ({ one, many }) => ({
+  language: one(languages, {
+    fields: [classes.languageId],
+    references: [languages.id],
+  }),
+  students: many(students), //a class can have many students
+}))
+
 export const students = pgTable('students', {
   id: text('id').primaryKey(),
-  studentname: text('student_name').notNull().unique(),
+  studentName: text('student_name').notNull().unique(),
   email: text('email').notNull().unique(),
   companyId: integer('company_id')
     .references(() => companies.id)
@@ -39,6 +52,13 @@ export const students = pgTable('students', {
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow(),
 })
+
+export const studentsRelations = relations(students, ({ one }) => ({
+  class: one(classes, {
+    fields: [students.classId],
+    references: [classes.id],
+  }),
+}))
 
 export const studentProgress = pgTable('student_progess', {
   id: serial('id').primaryKey(),
