@@ -27,10 +27,15 @@ export const classes = pgTable('classes', {
 })
 
 export const students = pgTable('students', {
-  id: serial('id').primaryKey(),
-  clerkId: text('clerk_id').notNull().unique(),
+  id: text('id').primaryKey(),
   studentname: text('student_name').notNull().unique(),
   email: text('email').notNull().unique(),
+  companyId: integer('company_id')
+    .references(() => companies.id)
+    .notNull(),
+  classId: integer('class_id')
+    .references(() => classes.id)
+    .notNull(),
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow(),
 })

@@ -1,5 +1,7 @@
 https://www.youtube.com/watch?v=dP75Khfy4s4&t=8084s
 
-my copy done up to 2hr 14min
+my copy done up to 2hr 33min UserProgress
 
 *******************************************
+
+TODO: Give /languages page a layout. Style the Card component so it doesn't nee to first div at the top of card since we're not using the check mark. Also whole active and activeCourseId in Card and in List components
