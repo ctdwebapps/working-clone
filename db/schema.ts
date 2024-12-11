@@ -21,10 +21,18 @@ export const companies = pgTable('companies', {
   createdAt: timestamp('created_at').defaultNow(),
 })
 
+//companies relations
+export const companiesRelations = relations(companies, ({ many }) => ({
+  classes: many(classes),
+}))
+
 export const classes = pgTable('classes', {
   id: serial('id').primaryKey(),
   classNumber: text('class_number').notNull().unique(),
   languageId: integer('language_id').references(() => languages.id, {
+    onDelete: 'restrict',
+  }),
+  companyId: integer('company_id').references(() => companies.id, {
     onDelete: 'restrict',
   }),
   createdAt: timestamp('created_at').defaultNow(),
@@ -35,6 +43,10 @@ export const classesRelations = relations(classes, ({ one, many }) => ({
   language: one(languages, {
     fields: [classes.languageId],
     references: [languages.id],
+  }),
+  company: one(companies, {
+    fields: [classes.companyId],
+    references: [companies.id],
   }),
   students: many(students), //a class can have many students
 }))

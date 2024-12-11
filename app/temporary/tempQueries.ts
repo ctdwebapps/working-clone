@@ -1,5 +1,5 @@
 import { db } from '@/db/drizzle'
-import { students } from '@/db/schema'
+import { companies, students } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 import { cache } from 'react'
 
@@ -30,6 +30,12 @@ export const getStudentLanguage = cache(async (userId: string) => {
   return data
 })
 
-// Usage
-// const studentLanguage = await getStudentLanguage('student-id-here')
-// console.log(studentLanguage)
+export const getClassesByCompany = cache(async (companyId: number) => {
+  const data = await db.query.companies.findMany({
+    where: eq(companies.id, companyId),
+    with: {
+      classes: true,
+    },
+  })
+  return data
+})

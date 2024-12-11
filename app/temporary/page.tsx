@@ -1,18 +1,20 @@
 import { getLanguages, getStudentClass } from '@/db/queries'
 import { auth } from '@clerk/nextjs/server'
-import { getStudent, getStudents } from './tempQueries'
+import { getClassesByCompany, getStudent, getStudents } from './tempQueries'
 
 const Temporary = async () => {
   const { userId } = await auth()
-  const languages = await getLanguages()
 
-  const studentClass = await getStudentClass(userId)
-  // console.log(studentClass.language.languageCode)
-  const activeLanguage = studentClass?.language.languageCode
-  console.log(activeLanguage)
+  const classes = await getClassesByCompany(1)
 
-  const students = await getStudents()
-  const student = await getStudent(userId)
+  // const languages = await getLanguages()
+  // const studentClass = await getStudentClass(userId)
+  // // console.log(studentClass.language.languageCode)
+  // const activeLanguage = studentClass?.language.languageCode
+  // console.log(activeLanguage)
+
+  // const students = await getStudents()
+  // const student = await getStudent(userId)
 
   return (
     <div>
@@ -25,8 +27,10 @@ const Temporary = async () => {
       {JSON.stringify(students)}
       <p className='text-xl'>One Student</p>
       {JSON.stringify(student)} */}
-      <p className='text-xl'>Student class</p>
-      {JSON.stringify(studentClass)}
+      {/* <p className='text-xl'>Student class</p>
+      {JSON.stringify(studentClass)} */}
+      <p className='text-xl'>Class by company</p>
+      {JSON.stringify(classes)}
     </div>
   )
 }
