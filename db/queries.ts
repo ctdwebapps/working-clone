@@ -10,11 +10,8 @@ export const getLanguages = cache(async () => {
 })
 
 //get student's language from their class
-export const getStudentClass = cache(async (userId: string) => {
-  if (!userId) {
-    return null
-  }
-  const studentClass = await db.query.students.findFirst({
+export const getStudentLanguage = cache(async (userId: string) => {
+  const data = await db.query.students.findFirst({
     where: eq(students.id, userId),
     with: {
       class: {
@@ -24,10 +21,6 @@ export const getStudentClass = cache(async (userId: string) => {
       },
     },
   })
-  // Check if the student is enrolled in a class, and return the class or null if not enrolled
-  if (!studentClass || !studentClass.class) {
-    return null
-  }
 
-  return studentClass.class // Return the class associated with the student
+  return data
 })

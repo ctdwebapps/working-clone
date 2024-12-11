@@ -1,11 +1,10 @@
-import { getLanguages, getStudentClass } from '@/db/queries'
+import { getLanguages, getStudentLanguage } from '@/db/queries'
 import { List } from './list'
 import { auth } from '@clerk/nextjs/server'
 import { Loader2 } from 'lucide-react'
 
 const Languages = async () => {
   const { userId } = await auth()
-  console.log(userId)
 
   // Check if the userId is null or undefined, and handle the case accordingly
   if (!userId) {
@@ -15,10 +14,10 @@ const Languages = async () => {
   // Fetch all languages and student class in parallel
   const [languages, studentClass] = await Promise.all([
     getLanguages(),
-    // getStudentClass(userId), // Fetch student class to determine active language
+    getStudentLanguage(userId), // Fetch student class to determine active language
   ])
 
-  // const activeLanguage = studentClass?.language.languageCode || null
+  const activeLanguage = studentClass?.class.language.languageCode
 
   // Handle empty states and loading
   if (!languages?.length) {
