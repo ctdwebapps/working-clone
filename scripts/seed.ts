@@ -275,8 +275,9 @@ const main = async () => {
         level: 'Elementary',
         moduleObjectives:
           'In this module you will learn how to communicate on the telephone clearly and effectively.',
-        imageSrc: '/images/learn.jpg',
+        imageSrc: '/learn.jpg',
         languageId: 1,
+        courseId: 1,
       },
       {
         id: 2,
@@ -286,7 +287,7 @@ const main = async () => {
         moduleObjectives:
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 1,
-        imageSrc: '/images/learn.jpg',
+        imageSrc: '/learn.jpg',
         courseId: 1,
       },
       {
@@ -297,7 +298,7 @@ const main = async () => {
         moduleObjectives:
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 1,
-        imageSrc: '/images/learn.jpg',
+        imageSrc: '/learn.jpg',
         courseId: 1,
       },
       {
@@ -308,7 +309,7 @@ const main = async () => {
         moduleObjectives:
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 1,
-        imageSrc: '/images/learn.jpg',
+        imageSrc: '/learn.jpg',
         courseId: 1,
       },
       {
@@ -319,7 +320,7 @@ const main = async () => {
         moduleObjectives:
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 4,
-        imageSrc: '/images/learn.jpg',
+        imageSrc: '/learn.jpg',
         courseId: 1,
       },
       {
@@ -330,7 +331,7 @@ const main = async () => {
         moduleObjectives:
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 2,
-        imageSrc: '/images/learn.jpg',
+        imageSrc: '/learn.jpg',
         courseId: 1,
       },
       {
@@ -341,7 +342,7 @@ const main = async () => {
         moduleObjectives:
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 1,
-        imageSrc: '/images/learn.jpg',
+        imageSrc: '/learn.jpg',
         courseId: 1,
       },
       {
@@ -352,7 +353,7 @@ const main = async () => {
         moduleObjectives:
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 1,
-        imageSrc: '/images/learn.jpg',
+        imageSrc: '/learn.jpg',
         courseId: 1,
       },
       {
@@ -363,7 +364,7 @@ const main = async () => {
         moduleObjectives:
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 1,
-        imageSrc: '/images/learn.jpg',
+        imageSrc: '/learn.jpg',
         courseId: 1,
       },
       {
@@ -374,7 +375,7 @@ const main = async () => {
         moduleObjectives:
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 1,
-        imageSrc: '/images/learn.jpg',
+        imageSrc: '/learn.jpg',
         courseId: 1,
       },
       {
@@ -385,7 +386,7 @@ const main = async () => {
         moduleObjectives:
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 2,
-        imageSrc: '/images/learn.jpg',
+        imageSrc: '/learn.jpg',
         courseId: 1,
       },
       {
@@ -396,7 +397,7 @@ const main = async () => {
         moduleObjectives:
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 2,
-        imageSrc: '/images/learn.jpg',
+        imageSrc: '/learn.jpg',
         courseId: 1,
       },
       {
@@ -407,7 +408,7 @@ const main = async () => {
         moduleObjectives:
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         level: 'Beginner',
-        imageSrc: '/images/learn.jpg',
+        imageSrc: '/learn.jpg',
         courseId: 1,
       },
     ])
