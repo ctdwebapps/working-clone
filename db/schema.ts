@@ -25,13 +25,13 @@ export const classes = pgTable('classes', {
   id: serial('id').primaryKey(),
   classNumber: text('class_number').notNull().unique(),
   languageId: integer('language_id').references(() => languages.id, {
-    onDelete: 'restrict',
+    onDelete: 'cascade',
   }),
   companyId: integer('company_id').references(() => companies.id, {
-    onDelete: 'restrict',
+    onDelete: 'cascade',
   }),
   courseId: integer('course_id').references(() => courses.id, {
-    onDelete: 'restrict', // Prevent deletion if linked to a class
+    onDelete: 'cascade', // Prevent deletion if linked to a class
   }),
   createdAt: timestamp('created_at').defaultNow(),
 })
@@ -41,7 +41,10 @@ export const students = pgTable('students', {
   studentName: text('student_name').notNull().unique(),
   email: text('email').notNull().unique(),
   companyId: integer('company_id')
-    .references(() => companies.id)
+    .references(() => companies.id, {
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    })
     .notNull(),
   classId: integer('class_id')
     .references(() => classes.id)
@@ -107,7 +110,7 @@ export const modules = pgTable('modules', {
 //language relations
 export const languagesRelations = relations(languages, ({ many }) => ({
   courses: many(courses), // Defines the relation between languages and courses
-  modules: many(modules), // One language can have many modules
+  //modules: many(modules), // One language can have many modules
   //lessons: many(lessons), // One language can have many lessons
 }))
 
@@ -135,13 +138,21 @@ export const classesRelations = relations(classes, ({ one, many }) => ({
 }))
 
 export const studentsRelations = relations(students, ({ one }) => ({
+  company: one(companies, {
+    fields: [students.companyId],
+    references: [companies.id],
+  }),
   class: one(classes, {
     fields: [students.classId],
     references: [classes.id],
   }),
 }))
 
-export const coursesRelations = relations(courses, ({ many }) => ({
+export const coursesRelations = relations(courses, ({ one, many }) => ({
+  language: one(languages, {
+    fields: [courses.languageId],
+    references: [languages.id],
+  }),
   modules: many(modules),
 }))
 
