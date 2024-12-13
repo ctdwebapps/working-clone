@@ -24,3 +24,27 @@ export const getStudentLanguage = cache(async (userId: string) => {
 
   return data
 })
+
+//Query: show the students course name and list the modules for that course fro clicking
+export const getStudentCourseAndModules = cache(async (userId: string) => {
+  const data = await db.query.students.findFirst({
+    where: eq(students.id, userId),
+    with: {
+      class: {
+        with: {
+          course: {
+            with: {
+              modules: true, // Fetch modules for the course
+            },
+          },
+          language: true, // Access the language directly through the class relation
+        },
+      },
+    },
+  })
+  return data
+  // Extract course and modules
+  // const course = data?.class?.course
+  // const modules = course?.modules || []
+  // return { course, modules }
+})
