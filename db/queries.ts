@@ -34,7 +34,11 @@ export const getStudentCourseAndModules = cache(async (userId: string) => {
         with: {
           course: {
             with: {
-              modules: true, // Fetch modules for the course
+              coursesToModules: {
+                with: {
+                  module: true,
+                },
+              },
             },
           },
           language: true, // Access the language directly through the class relation

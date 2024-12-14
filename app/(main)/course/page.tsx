@@ -14,9 +14,9 @@ const Course = async () => {
   }
 
   const modulesForStudent = await getStudentCourseAndModules(userId)
-  console.log(modulesForStudent)
-  const modules = modulesForStudent.class.course.modules
-  // console.log(modules)
+  // console.log(modulesForStudent)
+  const modules = modulesForStudent?.class.course?.coursesToModules
+  console.log(modules)
 
   // Fallback UI if no course data is found
   if (!modulesForStudent) {
@@ -40,16 +40,15 @@ const Course = async () => {
             {modulesForStudent?.class.course?.courseDescription}
           </h3>
           {/* <h2 className='text-2xl mt-5'>Modules:</h2> */}
-          {/* {JSON.stringify(modulesForStudent)} */}
+          {/* {JSON.stringify(modulesForStudent.class.course.coursesToModules)} */}
           <div className='grid lg:grid-cols-3 md:grid-cols-2 max-w-screen-xl mx-auto gap-1'>
             {modules.map((module) => (
-              // <p key={module.id}>{module.moduleName}</p>
               <Card
-                title={module.moduleName}
-                key={module.id}
-                image={module.imageSrc} //need to change the images for each module
+                title={module.module.moduleName}
+                key={module.module.id}
+                image={module.module.imageSrc}
                 progress={50}
-                id={module.id}
+                id={module.module.id}
               />
             ))}
           </div>

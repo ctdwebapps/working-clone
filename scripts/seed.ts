@@ -17,6 +17,9 @@ const main = async () => {
     await db.delete(schema.students)
     await db.delete(schema.courses)
     await db.delete(schema.modules)
+    await db.delete(schema.lessons)
+    await db.delete(schema.coursesToModules)
+    await db.delete(schema.modulesToLessons)
 
     //INSERT LANGUAGES
     await db.insert(schema.languages).values([
@@ -106,7 +109,7 @@ const main = async () => {
     await db.insert(schema.courses).values([
       {
         id: 1,
-        courseName: 'Elementary Business Communication',
+        courseName: 'Business Communication',
         level: 'Elementary',
         courseDescription:
           'In this course you will develop skills for polite and effective communication in English with colleagues and clients.',
@@ -277,7 +280,6 @@ const main = async () => {
           'In this module you will learn how to communicate on the telephone clearly and effectively.',
         imageSrc: '/learn.jpg',
         languageId: 1,
-        courseId: 1,
       },
       {
         id: 2,
@@ -288,7 +290,6 @@ const main = async () => {
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 1,
         imageSrc: '/learn.jpg',
-        courseId: 1,
       },
       {
         id: 3,
@@ -299,7 +300,6 @@ const main = async () => {
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 1,
         imageSrc: '/learn.jpg',
-        courseId: 1,
       },
       {
         id: 4,
@@ -310,7 +310,6 @@ const main = async () => {
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 1,
         imageSrc: '/learn.jpg',
-        courseId: 1,
       },
       {
         id: 5,
@@ -321,7 +320,6 @@ const main = async () => {
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 4,
         imageSrc: '/learn.jpg',
-        courseId: 1,
       },
       {
         id: 6,
@@ -332,7 +330,6 @@ const main = async () => {
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 2,
         imageSrc: '/learn.jpg',
-        courseId: 1,
       },
       {
         id: 7,
@@ -343,7 +340,6 @@ const main = async () => {
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 1,
         imageSrc: '/learn.jpg',
-        courseId: 1,
       },
       {
         id: 8,
@@ -354,7 +350,6 @@ const main = async () => {
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 1,
         imageSrc: '/learn.jpg',
-        courseId: 1,
       },
       {
         id: 9,
@@ -365,7 +360,6 @@ const main = async () => {
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 1,
         imageSrc: '/learn.jpg',
-        courseId: 1,
       },
       {
         id: 10,
@@ -376,7 +370,6 @@ const main = async () => {
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 1,
         imageSrc: '/learn.jpg',
-        courseId: 1,
       },
       {
         id: 11,
@@ -387,7 +380,6 @@ const main = async () => {
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 2,
         imageSrc: '/learn.jpg',
-        courseId: 1,
       },
       {
         id: 12,
@@ -398,7 +390,6 @@ const main = async () => {
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         languageId: 2,
         imageSrc: '/learn.jpg',
-        courseId: 1,
       },
       {
         id: 13,
@@ -409,7 +400,58 @@ const main = async () => {
           'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo',
         level: 'Beginner',
         imageSrc: '/learn.jpg',
+      },
+    ])
+
+    //INSERT classes to courses to modules
+    await db.insert(schema.coursesToModules).values([
+      {
         courseId: 1,
+        moduleId: 1,
+      },
+      {
+        courseId: 1,
+        moduleId: 8,
+      },
+      {
+        courseId: 1,
+        moduleId: 9,
+      },
+      {
+        courseId: 1,
+        moduleId: 10,
+      },
+      {
+        courseId: 2,
+        moduleId: 2,
+      },
+      {
+        courseId: 6,
+        moduleId: 3,
+      },
+      {
+        courseId: 2,
+        moduleId: 7,
+      },
+      {
+        courseId: 2,
+        moduleId: 5,
+      },
+      {
+        courseId: 2,
+        moduleId: 6,
+      },
+      {
+        courseId: 2,
+        moduleId: 11,
+      },
+      {
+        courseId: 2,
+        moduleId: 12,
+      },
+      {
+        courseId: 2,
+        moduleId: 13,
       },
     ])
 
