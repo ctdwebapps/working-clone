@@ -42,7 +42,7 @@ const main = async () => {
         id: 4,
         language: 'Japanese',
         languageCode: 'ja',
-        imageSrc: '/jp.svg',
+        imageSrc: '/ja.svg',
       },
       {
         id: 5,
@@ -54,7 +54,7 @@ const main = async () => {
         id: 6,
         language: 'Korean',
         languageCode: 'ko',
-        imageSrc: '/kr.svg',
+        imageSrc: '/ko.svg',
       },
 
       {

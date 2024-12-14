@@ -3,6 +3,7 @@ import {
   integer,
   jsonb,
   pgTable,
+  primaryKey,
   serial,
   text,
   timestamp,
@@ -101,10 +102,48 @@ export const modules = pgTable('modules', {
 //   lessonName: text('lesson_name').notNull(),
 //   lessonObjectives: text('lesson_objectives').notNull(),
 //   level: text('level').notNull(),
+//  languageId: integer('language_id')
+//     .notNull()
+//     .references(() => languages.id, {
+//       onDelete: 'cascade',
+//       onUpdate: 'cascade',
+// }),
 //   lessonsContent: jsonb('lesson_content').notNull(),
 //   createdAt: timestamp('created_at').defaultNow(),
 //   updatedAt: timestamp('updated_at').defaultNow(),
 // })
+
+//***************JUNCTION TABLES*********************** */
+export const coursesToModules = pgTable(
+  'courses_to_modules',
+  {
+    courseId: integer('course_id')
+      .notNull()
+      .references(() => courses.id, { onDelete: 'cascade' }), // Fix the reference here
+    moduleId: integer('module_id')
+      .notNull()
+      .references(() => modules.id, { onDelete: 'cascade' }),
+  },
+  (table) => ({
+    pk: primaryKey(table.courseId, table.moduleId), // Composite primary key
+  })
+)
+
+//modules to lessons (many to many)
+// export const modulesToLessons = pgTable(
+//   'modules_to_lessons',
+//   {
+//     moduleId: integer('module_id')
+//       .notNull()
+//       .references(() => modules.id, { onDelete: 'cascade' }),
+//     lessonId: integer('lesson_id')
+//       .notNull()
+//       .references(() => lessons.id, { onDelete: 'cascade' }),
+//   },
+//   (table) => ({
+//     pk: primaryKey(table.moduleId, table.lessonId), // Composite primary key
+//   })
+// )
 
 //*************RELATIONS ************************ */
 //language relations
@@ -154,6 +193,8 @@ export const coursesRelations = relations(courses, ({ one, many }) => ({
     references: [languages.id],
   }),
   modules: many(modules),
+  classes: many(classes), // One course can belong to many classes
+  // coursesToModules: many(coursesToModules),
 }))
 
 // Update `modulesRelations`
@@ -162,4 +203,59 @@ export const modulesRelations = relations(modules, ({ one }) => ({
     fields: [modules.courseId],
     references: [courses.id],
   }),
+  // language: one(languages, {
+  //   fields: [modules.languageId],
+  //   references: [languages.id],
+  // }),
+  //lessons: many(modulesToLessons), // Many-to-many relationship via modules_to_lessons
+  //modulesToLessons: many(modulesToLessons), // Relation to the junction table
 }))
+
+// Student Progress Relations
+// export const studentProgressRelations = relations(
+//   studentProgress,
+//   ({ one }) => ({
+//     student: one(students, {
+//       fields: [studentProgress.studentId],
+//       references: [students.id],
+//     }),
+//     module: one(modules, {
+//       fields: [studentProgress.moduleId],
+//       references: [modules.id],
+//     }),
+//     lesson: one(lessons, {
+//       fields: [studentProgress.lessonId],
+//       references: [lessons.id],
+//     }),
+//   })
+// )
+
+//junction table courses to modules relations
+// export const coursesToModulesRelations = relations(
+//   coursesToModules,
+//   ({ one }) => ({
+//     course: one(courses, {
+//       fields: [coursesToModules.courseId],
+//       references: [courses.id],
+//     }),
+//     module: one(modules, {
+//       fields: [coursesToModules.moduleId],
+//       references: [modules.id],
+//     }),
+//   })
+// )
+
+//junction table modules to lessons relations
+// export const modulesToLessonsRelations = relations(
+//   modulesToLessons,
+//   ({ one }) => ({
+//     module: one(modules, {
+//       fields: [modulesToLessons.moduleId],
+//       references: [modules.id],
+//     }),
+//     lesson: one(lessons, {
+//       fields: [modulesToLessons.lessonId],
+//       references: [lessons.id],
+//     }),
+//   })
+// )
